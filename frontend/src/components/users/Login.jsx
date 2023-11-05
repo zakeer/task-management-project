@@ -113,7 +113,7 @@ class Login extends React.Component {
         </Button>
         <p className="flex justify-center">Or</p>
         <div className="flex justify-center items-center">
-          <p> Already have an account ?</p>
+          <p> Need an account ?</p>
           <Button
             href="/register"
             sx={{ fontSize: "13px", textDecoration: "underline" }}
