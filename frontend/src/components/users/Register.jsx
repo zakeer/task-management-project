@@ -102,7 +102,7 @@ function Register(props) {
         <p> Already have an account ?</p>
         <Button
           href="/login"
-          sx={{ fontSize: "13px", textDecoration: "underline" }}
+          sx={{ fontSize: "13px", textDecoration: "underline", padding:"0px", margin:"0px", paddingTop:"4px" }}
         >
           Login
         </Button>

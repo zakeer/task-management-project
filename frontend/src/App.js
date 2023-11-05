@@ -13,7 +13,7 @@ export default function App() {
             <div className="container max-w-2xl">
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/id" element={<ProductList />}></Route>
+                        <Route path="/" element={<ProductList />}></Route>
                         <Route path="/login" element={<Login />}></Route> 
                         <Route path="/register" element={<Register />}></Route>               
                         <Route path="/add" element={<AddProduct />}></Route>

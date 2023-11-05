@@ -112,11 +112,11 @@ class Login extends React.Component {
           Login <KeyboardArrowRightIcon />
         </Button>
         <p className="flex justify-center">Or</p>
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center gap-2 items-center">
           <p> Need an account ?</p>
           <Button
             href="/register"
-            sx={{ fontSize: "13px", textDecoration: "underline" }}
+            sx={{ fontSize: "13px", textDecoration: "underline", padding:"0px", margin:"0px", paddingTop:"4px"}}
           >
             Register
           </Button>
