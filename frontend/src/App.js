@@ -13,12 +13,9 @@ export default function App() {
             <div className="container max-w-2xl">
                 <BrowserRouter>
                     <Routes>
-
-                        <Route path="/" element={<>
-                            <Login myProp="SOME VALUE" />
-                            <hr />
-                            <Register someProps="STATIC DATA" />
-                        </>}></Route>
+                        <Route path="/id" element={<ProductList />}></Route>
+                        <Route path="/login" element={<Login />}></Route> 
+                        <Route path="/register" element={<Register />}></Route>               
                         <Route path="/add" element={<AddProduct />}></Route>
                         <Route path="/edit/:id" element={<EditProduct />}></Route>
                     </Routes>
