@@ -37,6 +37,8 @@ function Register(props) {
     if (email && password) {
       setEmailError(false);
       setPasswordError(false);
+      setEmail("");
+      setPassword("");
     } else {
       setEmailError(true);
       setPasswordError(true);
@@ -63,6 +65,7 @@ function Register(props) {
         label="Email"
         variant="standard"
         type="email"
+        value={email}
         required
         error={emailError}
         helperText={emailError && "!Email required"}
@@ -73,6 +76,7 @@ function Register(props) {
           id="standard-adornment-password"
           type={showPassword ? "text" : "password"}
           onChange={handlePasswordChange}
+          value={password}
           endAdornment={
             <InputAdornment position="end">
               <IconButton

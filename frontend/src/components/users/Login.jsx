@@ -44,7 +44,6 @@ class Login extends React.Component {
       this.setState({ emailError: true });
       this.setState({ passwordError: true });
     }
-    console.log(email, password);
   };
 
   handleEmailChange = (event) => {
