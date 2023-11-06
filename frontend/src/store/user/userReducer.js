@@ -8,6 +8,7 @@ const userInitialState = {
 
 export default function userReducer(state = userInitialState, action) {
     const { type, payload } = action || {};
+    console.log(":: userReducer INVOKED ::", { state, action })
 
     switch (type) {
         case USER_ACTIONS.LOGIN_SUCCESS:
