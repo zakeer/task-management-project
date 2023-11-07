@@ -8,12 +8,12 @@ const prisma = new PrismaClient()
 
 export const login = async (req, res) => {
     const { username, password } = req.body;
-    console.log({username, password}, req.body)
+    console.log({ username, password }, req.body)
     const user = await prisma.user.findUnique({ where: { username } });
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(401).json({ error: 'Invalid credentials' });
     }
-    const token = jwt.sign({ userId: 'user.id' }, 'your_secret_key');
+    const token = jwt.sign({ userId: user.id }, 'your_secret_key');
     res.json({ token });
 }
 
