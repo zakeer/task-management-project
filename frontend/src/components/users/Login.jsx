@@ -1,7 +1,7 @@
 import React, { createRef } from 'react';
 import axios from 'axios'
 import { connect } from 'react-redux'
-import { USER_ACTIONS } from '../../store/user/actions';
+import { USER_ACTIONS, doLogin, userLoginFailure, userLoginSuccess } from '../../store/user/actions';
 
 class Login extends React.Component {
     constructor(props) {
@@ -13,22 +13,7 @@ class Login extends React.Component {
         e.preventDefault();
         const username = this.formRef.current.querySelector("#username").value;
         const password = this.formRef.current.querySelector("#password").value;
-        console.log({ username, password });
-        this.props.login();
-        // const LOGIN_ENDPOINT = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev/login`
-        // fetch(LOGIN_ENDPOINT, {
-        //     method: "POST",
-        //     body: JSON.stringify({username: 'zakeer579@gmail.com', password: '123456'}),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(loginResponse => console.log(":: FETCH LOGIN ::", loginResponse));
-
-        // axios
-        //     .post(LOGIN_ENDPOINT, {username: 'zakeer579@gmail.com', password: '123456'})
-        //     .then(res => console.log(":: AXIOS LOGIN ::", res.data));
+        this.props.login({username, password})
     }
 
     render() {
@@ -91,10 +76,11 @@ const mapStateToProps = (storeState) => {
     }
 }
 
-const mapDispatchToProps = (dispatchFn) => {
+const mapDispatchActionsToProps = (dispatch) => {
     return {
-        login: () => dispatchFn({ type: USER_ACTIONS.LOGIN_FAILURE, payload: 'SOME ERROR' })
+        dispatch,
+        login: doLogin(dispatch) // () => {}
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login); // <Login {...prevProps} storeState={{}} error={storeState.error} />
+export default connect(mapStateToProps, mapDispatchActionsToProps)(Login); // <Login {...prevProps} storeState={{}} error={storeState.error} />

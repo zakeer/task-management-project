@@ -14,15 +14,14 @@ export default function userReducer(state = userInitialState, action) {
         case USER_ACTIONS.LOGIN_SUCCESS:
             return {
                 ...state,
+                error: null,
                 token: payload.token,
-                email: payload.email
             }
         case USER_ACTIONS.LOGIN_FAILURE:
         case USER_ACTIONS.REGISTER_FAILURE:
             return {
                 ...state,
                 token: null,
-                email: null,
                 error: payload
             }
         default:
