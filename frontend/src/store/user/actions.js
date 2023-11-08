@@ -1,10 +1,18 @@
 import axios from "axios"
+import { saveAuth } from "../../utils/auth"
+import { userLogin, userRegister } from "../../services"
 
 export const USER_ACTIONS = {
     LOGIN_SUCCESS: 'LOGIN_SUCCESS',
     LOGIN_FAILURE: 'LOGIN_FAILURE',
     REGISTER_FAILURE: 'REGISTER_FAILURE',
+    LOGOUT: 'USER_LOGOUT',
 }
+
+export const userLogout = () => ({
+    type: USER_ACTIONS.LOGOUT
+})
+
 export const userLoginSuccess = (token) => {
     return {
         type: USER_ACTIONS.LOGIN_SUCCESS,
@@ -22,12 +30,11 @@ export const userLoginFailure = (error) => {
 // doLogin(dispatch)({username, password})
 export const doLogin = (dispatch) => {
     return (payload) => {
-        const LOGIN_ENDPOINT = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev/login`
-        axios
-            .post(LOGIN_ENDPOINT, payload)
+        userLogin(payload)
             .then((response) => {
-                console.log(":: LOGIN ::", response.data)
-                dispatch(userLoginSuccess(response?.data?.token))
+                console.log(":: LOGIN ::", response.data);
+                dispatch(userLoginSuccess(response?.data?.token));
+                saveAuth(response?.data)
             })
             .catch((error) => {
                 console.log(":: LOGIN ERROR ::", error);
@@ -39,10 +46,8 @@ export const doLogin = (dispatch) => {
 
 
 export const doRegister = (dispatch) => {
-    const REGISTER_ENDPOINT = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev/register`
     return (registerPayload) => {
-        axios
-            .post(REGISTER_ENDPOINT, registerPayload)
+        userRegister(registerPayload)
             .then((response) => {
                 console.log(":: REGISTER ::", response.data)
                 doLogin(dispatch)(registerPayload);

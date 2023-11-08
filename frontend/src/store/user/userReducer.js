@@ -1,9 +1,13 @@
+import { getAuthDetails } from "../../utils/auth";
 import { USER_ACTIONS } from "./actions";
+
+const previousAuthState = getAuthDetails();
 
 const userInitialState = {
     token: null,
     email: null,
-    error: 'SOMETHING HAPPEND FROM THE CLIENT'
+    error: '',
+    ...previousAuthState,
 }
 
 export default function userReducer(state = userInitialState, action) {
@@ -24,8 +28,13 @@ export default function userReducer(state = userInitialState, action) {
                 token: null,
                 error: payload
             }
+        case USER_ACTIONS.LOGOUT:
+            return {
+                ...state,
+                token: null,
+                error: null
+            }
         default:
             return state;
     }
 }
-
