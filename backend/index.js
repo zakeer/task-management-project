@@ -4,6 +4,7 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import TaskRoute from './routes/TaskRoute.js'
 import UserRoute from './routes/UserRoute.js'
+import CategoryRoute from './routes/CategoryRoute.js'
 dotenv.config()
 
 const app = express()
@@ -18,6 +19,7 @@ app.get('/', (req, res) => {
 })
 app.use(TaskRoute)
 app.use(UserRoute)
+app.use(CategoryRoute)
 
 
 

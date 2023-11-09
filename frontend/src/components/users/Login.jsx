@@ -1,7 +1,6 @@
 import React, { createRef } from 'react';
-import axios from 'axios'
 import { connect } from 'react-redux'
-import { USER_ACTIONS, doLogin, userLoginFailure, userLoginSuccess } from '../../store/user/actions';
+import { doLogin } from '../../store/user/actions';
 
 class Login extends React.Component {
     constructor(props) {

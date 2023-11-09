@@ -1,7 +1,32 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import userReducer from './user/userReducer';
+import categoryReducer from './category/categoryReducer';
 
-const appStore = createStore(userReducer);
+
+const rootReducer = combineReducers({
+    user: userReducer,
+    category: categoryReducer,
+    // tasks: taskReducer
+})
+const appStore = createStore(rootReducer);
+
+/*
+State
+{
+    user: {
+        token: null,
+        email: null,
+        error: '',
+        ...previousAuthState,
+    },
+    category: {
+        categories: []
+    },
+    tasks: {
+
+    }
+}
+*/
 
 export default appStore;
 

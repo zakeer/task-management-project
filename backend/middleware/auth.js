@@ -5,7 +5,7 @@ const prisma = new PrismaClient()
 // Authentication Middleware
 export const authenticate = async (req, res, next) => {
     const authHeader = req.headers.authorization;
-    const token = authHeader && authHeader.split(' ')[1];
+    const token = authHeader && authHeader.split(' ')[1]; // `Basic ${userAuthDetails.token}`
     if (!token) return res.status(401).json({ error: 'Token required' });
 
     try {

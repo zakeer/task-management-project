@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { connect, useStore, useSelector, useDispatch } from 'react-redux';
-import { USER_ACTIONS, doRegister } from '../../store/user/actions';
+import { connect, useSelector, useDispatch } from 'react-redux';
+import { doRegister } from '../../store/user/actions';
 
 function Register(props) {
     // const store = useStore();

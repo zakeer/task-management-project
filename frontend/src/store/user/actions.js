@@ -1,4 +1,3 @@
-import axios from "axios"
 import { saveAuth } from "../../utils/auth"
 import { userLogin, userRegister } from "../../services"
 

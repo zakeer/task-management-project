@@ -9,7 +9,7 @@ export default function Logout() {
     useEffect(() => {
         clearAuthDetails();
         dispatch(userLogout());
-    }, [])
+    }, [dispatch])
 
     return <Navigate to="/" />
 }
