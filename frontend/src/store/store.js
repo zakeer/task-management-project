@@ -1,12 +1,13 @@
 import { createStore, combineReducers } from 'redux';
 import userReducer from './user/userReducer';
 import categoryReducer from './category/categoryReducer';
+import taskReducer from './task/taskReducer';
 
 
 const rootReducer = combineReducers({
     user: userReducer,
     category: categoryReducer,
-    // tasks: taskReducer
+    tasks: taskReducer
 })
 const appStore = createStore(rootReducer);
 
@@ -23,7 +24,9 @@ State
         categories: []
     },
     tasks: {
-
+        taskItems: [],
+        isLoading: false,
+        hasError: null
     }
 }
 */

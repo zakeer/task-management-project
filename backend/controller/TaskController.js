@@ -24,12 +24,30 @@ export const getTaskById = async (req, res) => {
 }
 
 export const createTask = async (req, res) => {
-    const { name, price } = req.body
+    /*
+    title       String
+    description String
+    dueDate     DateTime
+    priority    String
+    isComplete  Boolean  @default(false)
+    categoryId  Int
+    userId      Int
+    */
+    const { title, description, dueDate, priority = 'low', isComplete = false, categoryId } = req.body;
+
+    if (!title || !description || !dueDate || !categoryId) {
+        return res.status(400).json({ error: `Title, Description, DueDate and CategoryID are required` })
+    }
     try {
         const task = await prisma.task.create({
             data: {
-                name: name,
-                price: price,
+                title,
+                description,
+                dueDate: new Date(dueDate),
+                priority,
+                isComplete,
+                categoryId: +categoryId,
+                userId: req?.user?.id
             },
         })
         res.status(201).json(task)

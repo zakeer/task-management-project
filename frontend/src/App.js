@@ -6,6 +6,8 @@ import Logout from './components/users/Logout'
 import { ProtectedRoute } from './components/common/ProtectedRoute';
 import AddCategory from './components/category/AddCategory';
 import CategoryList from './components/category/CategoryList';
+import TaskList from './components/tasks/TaskList';
+import AddTask from './components/tasks/AddTask';
 import('preline');
 
 
@@ -22,8 +24,8 @@ export default function App() {
                     <Route path="/logout" element={<Logout />} />
 
                     <Route element={<ProtectedRoute />}>
-                        <Route path="/tasks" element={<h1>Task View</h1>}></Route>
-                        <Route path="/add-task" element={<h1>Add Task View</h1>}></Route>
+                        <Route path="/tasks" element={<TaskList />}></Route>
+                        <Route path="/add-task" element={<AddTask />}></Route>
                         <Route path="/categories" element={<CategoryList />}></Route>
                         <Route path="/add-category" element={<AddCategory />}></Route>
                     </Route>
