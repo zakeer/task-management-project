@@ -54,3 +54,39 @@ export const createNewTask = (payload) => {
         }
     })
 }
+
+/*
+payload = {
+    "id": 1,
+    "title": "UI Login",
+    "description": "Design UI Login Page",
+    "dueDate": "2023-11-17T00:00:00.000Z",
+    "priority": "medium",
+    "isComplete": false,
+    "categoryId": 1,
+    "userId": 1
+}
+*/
+
+export const updateTask = ({ id, userId, ...rest }) => {
+    return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${payload.id}`, rest, {
+        headers: {
+            ...getAuthHeaders()
+        }
+    })
+}
+
+export const deleteTask = (id) => {
+    return axios.delete(`${API_ENDPOINTS.CREATE_TASK}/${id}`, {
+        headers: {
+            ...getAuthHeaders()
+        }
+    })
+}
+
+
+/*
+Actions    
+1. Update Task ({id, ...updatedFields}) -> updateTask();
+2. Delete task (id) -> deleteTask();
+*/

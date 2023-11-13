@@ -3,7 +3,8 @@ import { ACTIONS } from "./actions.js";
 const initialState = {
     taskItems: [],
     isLoading: false,
-    hasError: null
+    hasError: null,
+    isNewTaskAdded: false,
 }
 
 export default function taskReducer(state = initialState, action) {
@@ -28,6 +29,41 @@ export default function taskReducer(state = initialState, action) {
                 isLoading: false,
                 hasError: payload
             }
+
+        case ACTIONS.ADD_TASK:
+            return {
+                ...state,
+                isLoading: true,
+                isNewTaskAdded: false,
+                hasError: null
+            }
+
+        case ACTIONS.ADD_TASK_SUCCESS:
+            return {
+                ...state,
+                isNewTaskAdded: true,
+                isLoading: false,
+                hasError: null
+            }
+
+        case ACTIONS.ADD_TASK_FAILURE: {
+            return {
+                ...state,
+                isNewTaskAdded: false,
+                isLoading: false,
+                hasError: payload
+            }
+        }
+
+        case ACTIONS.CLEAR_ADD_TASK: {
+            return {
+                ...state,
+                isNewTaskAdded: false,
+                isLoading: false,
+                hasError: null
+            }
+        }
+
         default:
             return state
     }

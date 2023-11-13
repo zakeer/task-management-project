@@ -25,6 +25,7 @@ export default function App() {
 
                     <Route element={<ProtectedRoute />}>
                         <Route path="/tasks" element={<TaskList />}></Route>
+                        <Route path="/tasks/edit/:taskId" element={<AddTask edit />}></Route>
                         <Route path="/add-task" element={<AddTask />}></Route>
                         <Route path="/categories" element={<CategoryList />}></Route>
                         <Route path="/add-category" element={<AddCategory />}></Route>

@@ -4,7 +4,17 @@ export const ACTIONS = {
     FETCH_TASK_LIST: 'FETCH_TASK_LIST',
     FETCH_TASK_LIST_SUCCESS: 'FETCH_TASK_LIST_SUCCESS',
     FETCH_TASK_LIST_FAILURE: 'FETCH_TASK_LIST_FAILURE',
+
+    ADD_TASK: 'ADD_TASK',
+    ADD_TASK_SUCCESS: 'ADD_TASK_SUCCESS',
+    ADD_TASK_FAILURE: 'ADD_TASK_FAILURE',
+    CLEAR_ADD_TASK: 'CLEAR_ADD_TASK'
 }
+
+export const clearAddTask = () => ({ type: ACTIONS.CLEAR_ADD_TASK });
+export const addingTask = () => ({ type: ACTIONS.ADD_TASK });
+export const addingTaskSuccess = () => ({ type: ACTIONS.ADD_TASK_SUCCESS });
+export const addingTaskFailure = (error = "SOMETHING WENT WRONG") => ({ type: ACTIONS.ADD_TASK_FAILURE, payload: error });
 
 
 export const getAllTaskList = () => {
@@ -51,12 +61,17 @@ export const fetchAllTaskList = (dispatch) => {
 export const addTask = (dispatch) => {
     return async (newTaskPayload) => {
         try {
+            dispatch(addingTask());
             // API CALL
             const { data } = await createNewTask(newTaskPayload);
-
+            dispatch(addingTaskSuccess());
+            setTimeout(() => {
+                dispatch(clearAddTask());
+            }, 3000)
         } catch (error) {
             const errorMessage = error?.response?.data?.error
             console.log(":: addTask ERRRO ::", { error, errorMessage })
+            dispatch(addingTaskFailure(errorMessage));
         }
     }
 }
