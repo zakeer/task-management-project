@@ -1,4 +1,12 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+<<<<<<< HEAD
+=======
+import { Provider } from 'react-redux'
+import AddProduct from './components/AddProduct'
+import EditProduct from './components/EditProduct'
+//import ProductList from './components/ProductList'
+import appStore from './store/store'
+>>>>>>> 5b1c2ea (added)
 import Login from './components/users/Login'
 import Register from './components/users/Register'
 import Header from './components/common/Header';
