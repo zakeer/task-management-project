@@ -68,18 +68,28 @@ payload = {
 }
 */
 
-export const updateTask = ({ id, userId, ...rest }) => {
+export const updateTask = ({ id, userId, ...rest }, callback) => {
     return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${payload.id}`, rest, {
         headers: {
             ...getAuthHeaders()
         }
     })
+    .then((response) => {
+        if (callback && typeof callback === 'function') {
+            callback(response.data)
+        }
+    })
 }
 
-export const deleteTask = (id) => {
+export const deleteTask = (id, callback) => {
     return axios.delete(`${API_ENDPOINTS.CREATE_TASK}/${id}`, {
         headers: {
             ...getAuthHeaders()
+        }
+    })
+    .then((response) => {
+        if (callback && typeof callback === 'function') {
+            callback(response.data)
         }
     })
 }
