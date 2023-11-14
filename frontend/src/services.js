@@ -69,7 +69,7 @@ payload = {
 */
 
 export const updateTask = ({ id, userId, ...rest }, callback) => {
-    return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${payload.id}`, rest, {
+    return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${id}`, rest, {
         headers: {
             ...getAuthHeaders()
         }

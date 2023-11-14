@@ -42,7 +42,7 @@ export default function TaskList() {
 							{task.title}
 						</Link>
 						<button
-							onClick={() => {handleDeleteTask(task.id)}}
+							onClick={() => {handleDeletedTask(task.id)}}
 							className="float-right bg-red-500 text-white px-2 py-1 rounded"
 						>
 							Delete
