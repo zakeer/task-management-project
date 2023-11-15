@@ -3,6 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCategory, getAllCategories } from '../../store/category/actions'
 import { addTask } from '../../store/task/actions'
+import { fetchAllTaskList, taskUpdation} from '../../store/task/actions';
+
 
 const AddTask = ({ edit }) => {
     const dispatch = useDispatch();
@@ -23,10 +25,40 @@ const AddTask = ({ edit }) => {
         const newTaskPayload = [...target.querySelectorAll("input, select")].reduce((prev, curr) => {
             prev[curr.id] = curr.value
             return prev;
-        }, {})
-        addTask(dispatch)(newTaskPayload);
+        }, {});
+        //addTask(dispatch)(newTaskPayload);
+
+        if (edit) {
+            // If in edit mode, call handleUpdateTask
+            taskUpdation({taskId,...newTaskPayload});
+          } else {
+            // If not in edit mode, call addTask
+            addTask(dispatch)(newTaskPayload);
+          }
     }
 
+    // const handleUpdateTask = async (taskId, updatedFields) => {
+    //     try {
+    //       await taskUpdation(dispatch)({ taskId, updatedFields });
+    //       // Optionally, you can dispatch a fetchAllTaskList action to refresh the task list
+    //       // after successful update.
+    //       fetchAllTaskList(dispatch)();
+    //     } catch (error) {
+    //       console.error('Error updating task:', error);
+    //     }
+    //   };
+
+
+    // const handleUpdateTask = async (taskId, newTaskPayload) => {
+    //     try {
+    //       console.log('Before updateTask API call');
+    //       await taskUpdation(dispatch)({id:taskId, ...newTaskPayload});
+    //       console.log('After updateTask API call');
+    //       fetchAllTaskList(dispatch)(); // Optionally, you can dispatch a fetchAllTaskList action to refresh the task list after successful update.
+    //     } catch (error) {
+    //       console.error('Error updating task:', error);
+    //     }
+    //   };
     useEffect(() => {
         if (isNewTaskAdded) {
             setTimeout(() => {
@@ -118,20 +150,7 @@ const AddTask = ({ edit }) => {
                         {categories?.map(category => <option value={category.id}>{category.name}</option>)}
                     </select>
                 </div>
-
-                {/* <div className="mb-4">
-                    <label htmlFor="priority" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Category
-                    </label>
-                    <select
-                        id="priority"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Due Date"
-                        defaultValue="low"
-                    >
-
-                    </select>
-                </div> */}
+                
                 <button
                     type="submit"
                     className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">

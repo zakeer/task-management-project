@@ -1,4 +1,4 @@
-import { createNewTask, getTasksList } from "../../services"
+import { createNewTask, deleteTask, getTasksList, updateTask } from "../../services"
 
 export const ACTIONS = {
     FETCH_TASK_LIST: 'FETCH_TASK_LIST',
@@ -8,13 +8,20 @@ export const ACTIONS = {
     ADD_TASK: 'ADD_TASK',
     ADD_TASK_SUCCESS: 'ADD_TASK_SUCCESS',
     ADD_TASK_FAILURE: 'ADD_TASK_FAILURE',
-    CLEAR_ADD_TASK: 'CLEAR_ADD_TASK'
+    CLEAR_ADD_TASK: 'CLEAR_ADD_TASK',
+
+    UPDATE_TASK: 'UPDATE_TASK',
+    DELETE_TASK: 'DELETE_TASK',
+    
 }
 
 export const clearAddTask = () => ({ type: ACTIONS.CLEAR_ADD_TASK });
 export const addingTask = () => ({ type: ACTIONS.ADD_TASK });
 export const addingTaskSuccess = () => ({ type: ACTIONS.ADD_TASK_SUCCESS });
 export const addingTaskFailure = (error = "SOMETHING WENT WRONG") => ({ type: ACTIONS.ADD_TASK_FAILURE, payload: error });
+
+export const updatingTask = () => ({ type: ACTIONS.UPDATE_TASK });
+export const deletingTask = () => ({ type: ACTIONS.DELETE_TASK });
 
 
 export const getAllTaskList = () => {
@@ -75,4 +82,33 @@ export const addTask = (dispatch) => {
         }
     }
 }
+
+
+export const taskUpdation = (dispatch) => {
+    return async (newTaskPayload) => {
+        try {
+            dispatch(updatingTask());
+            const { data } = await updateTask(newTaskPayload);
+            fetchAllTaskList(dispatch)();
+        }
+        catch(error) {
+            const errorMessage = error?.response?.data?.error;
+            console.log(':: updateTask ERROR ::', { error, errorMessage });
+        }
+    }
+}
+
+export const taskDeletion = (dispatch) => {
+    return async (taskId) => {
+      try {
+        dispatch(deletingTask());
+        // API CALL
+        await deleteTask(taskId);
+        //dispatch(fetchAllTaskList(dispatch)());
+      } catch (error) {
+        const errorMessage = error?.response?.data?.error;
+        console.log(':: deleteTask ERROR ::', { error, errorMessage });
+      }
+    };
+  };
 
