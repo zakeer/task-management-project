@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCategory, getAllCategories } from '../../store/category/actions'
-import { addTask } from '../../store/task/actions'
+import { addTask, handleUpdateTask } from '../../store/task/actions'
 
 const AddTask = ({ edit }) => {
     const dispatch = useDispatch();
@@ -24,7 +24,13 @@ const AddTask = ({ edit }) => {
             prev[curr.id] = curr.value
             return prev;
         }, {})
-        addTask(dispatch)(newTaskPayload);
+       
+        if(edit){
+            handleUpdateTask(dispatch)({id:taskId, ...newTaskPayload})
+            console.log(newTaskPayload, "FROM ADD TASK")
+        } else {
+            addTask(dispatch)(newTaskPayload);
+        }
     }
 
     useEffect(() => {

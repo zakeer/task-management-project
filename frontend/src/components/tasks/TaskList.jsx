@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllTaskList } from '../../store/task/actions';
+import { fetchAllTaskList, handleDeleteTask } from '../../store/task/actions';
 import { Link } from 'react-router-dom'
 
 export default function TaskList() {
@@ -11,6 +11,11 @@ export default function TaskList() {
 		fetchAllTaskList(dispatch)();
 	}, [])
 
+	var handleOnClick = (id) => {
+		handleDeleteTask(dispatch)(id)
+	}
+
+    
 
 	return <div>
 		<div className="container mx-auto p-4">
@@ -30,7 +35,7 @@ export default function TaskList() {
 							{task.title}
 						</Link>
 						<button
-							onClick={() => { }}
+							onClick={() => handleOnClick(task.id)}
 							className="float-right bg-red-500 text-white px-2 py-1 rounded"
 						>
 							Delete

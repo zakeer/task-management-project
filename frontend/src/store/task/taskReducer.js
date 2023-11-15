@@ -5,6 +5,8 @@ const initialState = {
     isLoading: false,
     hasError: null,
     isNewTaskAdded: false,
+    isTaskUpdated : false,
+    isTaskDeleted : false
 }
 
 export default function taskReducer(state = initialState, action) {
@@ -64,8 +66,49 @@ export default function taskReducer(state = initialState, action) {
             }
         }
 
+        case ACTIONS.UPDATE_TASK_SUCCESS : {
+            return {
+                ...state,
+                isNewTaskAdded : false,
+                isTaskUpdated : true,
+                isLoading : false,
+                hasError : null,
+            }
+        }
+
+        case ACTIONS.UPDATE_TASK_FAILURE : {
+            return {
+                ...state,
+                isNewTaskAdded : false,
+                isTaskUpdated : false,
+                isLoading : false,
+                hasError : payload
+            }
+        }
+
+        case ACTIONS.DELETE_TASK_SUCCESS : {
+             return {
+                ...state,
+                isNewTaskAdded : false,
+                isTaskDeleted :true,
+                isLoading : false,
+                hasError : null
+             }
+
+        }
+
+        case ACTIONS.DELETE_TASK_FAILURE : {
+            return {
+                ...state,
+                isNewTaskAdded : false,
+                isTaskDeleted : false,
+                hasError : payload,
+                isLoading : false,
+            }
+        }
+
         default:
-            return state
+            return state;
     }
 }
 
