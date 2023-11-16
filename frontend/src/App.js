@@ -1,38 +1,13 @@
-// App.js
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store/configureStore';
-import TaskForm from './components/TaskForm';
-import TaskList from './components/TaskList';
-
-const App = () => {
-  return (
-    <Provider store={store}>
-      <Router>
-        <div>
-          <h1>Task Management App</h1>
-          <Switch>
-            <Route path="/add-task" component={TaskForm} />
-            <Route path="/task-list" component={TaskList} />
-          </Switch>
-        </div>
-      </Router>
-    </Provider>
-  );
-};
-
-export default App;
 
 
-/*
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 //import { Provider } from 'react-redux'
 //import AddProduct from './components/AddProduct'
 //import EditProduct from './components/EditProduct'
 //import ProductList from './components/ProductList'
-import appStore from './store/store'
+//import appStore from './store/store'
 
 import Login from './components/users/Login'
 import Register from './components/users/Register'
@@ -70,4 +45,3 @@ export default function App() {
         </div>
     )
 }
-*/
