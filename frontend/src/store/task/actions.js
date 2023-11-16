@@ -19,15 +19,16 @@ export const clearAddTask = () => ({ type: ACTIONS.CLEAR_ADD_TASK });
 export const addingTask = () => ({ type: ACTIONS.ADD_TASK });
 export const addingTaskSuccess = () => ({ type: ACTIONS.ADD_TASK_SUCCESS });
 export const addingTaskFailure = (error = "SOMETHING WENT WRONG") => ({ type: ACTIONS.ADD_TASK_FAILURE, payload: error });
+export const updateTaskSuccess = () => {
+    console.log("Update task success from dispatch")
+    return {
+          type : ACTIONS.UPDATE_TASK_SUCCESS
+    }
+}
 export const updateTaskFailure = ( error = "SOMETHING WENT WRONG") => ({ type : ACTIONS.UPDATE_TASK_FAILURE, payload: error });
 export const deleteTaskSuccess = () => ({ type : ACTIONS.DELETE_TASK_SUCCESS });
 export const deleteTaskFailure = () => ({ type : ACTIONS.DELETE_TASK_FAILURE });
 
-export const updateTaskSuccess = (updatedData = {}) => {
-    return {
-        type : ACTIONS.UPDATE_TASK_SUCCESS,
-    }
-}
 
 
 export const getAllTaskList = () => {
@@ -77,6 +78,7 @@ export const addTask = (dispatch) => {
             dispatch(addingTask());
             // API CALL
             const { data } = await createNewTask(newTaskPayload);
+            console.log(data, "From addTask -> action.js")
             dispatch(addingTaskSuccess());
             setTimeout(() => {
                 dispatch(clearAddTask());
@@ -97,12 +99,10 @@ export const handleUpdateTask = (dispatch) => {
         try {
           // API CALL
           const { data } = await updateTask(newTaskPayload);
+          console.log(data, "From handleUpdateTask -> action.js")
           dispatch(updateTaskSuccess());
-          fetchAllTaskList(dispatch)()
-          console.log(data, "UPDATE TASK SUCCESS -> actions.js")
         } catch (error) {
             const errorMessage = error?.response?.data?.error
-            console.log(":: updateTask ERROR ::", { error, errorMessage })
             dispatch(updateTaskFailure(errorMessage));
         }
     }
@@ -113,11 +113,13 @@ export const handleDeleteTask = (dispatch) => {
         try {
           // API CALL
           const deleteData = await deleteTask(deleteTaskid);
-          dispatch(deleteTaskSuccess());
-          fetchAllTaskList(dispatch)()
+          console.log(deleteData, 'From handleDeleteTask -> action.js')
+          setTimeout(() => {
+            fetchAllTaskList(dispatch)()
+        }, 1000)
+        dispatch(deleteTaskSuccess());
         } catch (error) {
             const errorMessage = error?.response?.data?.error
-            console.log(":: deleteTask ERROR ::", { error, errorMessage })
             dispatch(deleteTaskFailure(errorMessage));
         }
     }

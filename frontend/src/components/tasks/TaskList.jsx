@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllTaskList, handleDeleteTask } from '../../store/task/actions';
 import { Link } from 'react-router-dom'
+import DeleteTaskSuccessPopup from './TaskDeleted';
 
 export default function TaskList() {
 	const { taskItems = [], isLoading } = useSelector(state => state?.tasks)
@@ -9,7 +10,7 @@ export default function TaskList() {
 
 	useEffect(() => {
 		fetchAllTaskList(dispatch)();
-	}, [])
+	}, [dispatch])
 
 	var handleOnClick = (id) => {
 		handleDeleteTask(dispatch)(id)
@@ -18,16 +19,20 @@ export default function TaskList() {
     
 
 	return <div>
-		<div className="container mx-auto p-4">
+		<div className="container mx-auto p-4 mt-2 ">
+			<secion className="flex justify-between items-center">
 			<h2 className="text-2xl font-bold mb-4">Tasks</h2>
 			<Link
 				to="/add-task"
-				className="text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded text-lg"
+				className="text-slate-900 text-xl border-0 focus:outline-none hover:text-slate-500 hover:underline hover:transition rounded text-lg"
 			>
 				Add Task
 			</Link>
+			</secion>
+			{isLoading && <p className='flex justify-center items-center text-xl'>Loading.....</p>
+				
 
-			{isLoading && "Tasks are loading..."}
+			}
 			<ul className="mt-4">
 				{(taskItems || []).map(task => (
 					<li key={task.id} className="border p-4 mb-2">
@@ -43,6 +48,7 @@ export default function TaskList() {
 					</li>
 				))}
 			</ul>
+			<DeleteTaskSuccessPopup />
 		</div>
 	</div>
 } 

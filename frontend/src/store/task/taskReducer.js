@@ -17,13 +17,14 @@ export default function taskReducer(state = initialState, action) {
             return {
                 taskItems: [],
                 isLoading: true,
-                hasError: null
+                hasError: null,
+                
             }
         case ACTIONS.FETCH_TASK_LIST_SUCCESS:
             return {
                 taskItems: payload,
                 isLoading: false,
-                hasError: null
+                hasError: null,
             }
         case ACTIONS.FETCH_TASK_LIST_FAILURE:
             return {
@@ -69,9 +70,7 @@ export default function taskReducer(state = initialState, action) {
         case ACTIONS.UPDATE_TASK_SUCCESS : {
             return {
                 ...state,
-                isNewTaskAdded : false,
                 isTaskUpdated : true,
-                isLoading : false,
                 hasError : null,
             }
         }
@@ -79,9 +78,7 @@ export default function taskReducer(state = initialState, action) {
         case ACTIONS.UPDATE_TASK_FAILURE : {
             return {
                 ...state,
-                isNewTaskAdded : false,
                 isTaskUpdated : false,
-                isLoading : false,
                 hasError : payload
             }
         }
@@ -89,9 +86,7 @@ export default function taskReducer(state = initialState, action) {
         case ACTIONS.DELETE_TASK_SUCCESS : {
              return {
                 ...state,
-                isNewTaskAdded : false,
                 isTaskDeleted :true,
-                isLoading : false,
                 hasError : null
              }
 
@@ -100,10 +95,8 @@ export default function taskReducer(state = initialState, action) {
         case ACTIONS.DELETE_TASK_FAILURE : {
             return {
                 ...state,
-                isNewTaskAdded : false,
                 isTaskDeleted : false,
                 hasError : payload,
-                isLoading : false,
             }
         }
 

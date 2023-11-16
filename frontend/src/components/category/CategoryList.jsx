@@ -4,17 +4,18 @@ import { getAllCategories } from '../../store/category/actions';
 
 export default function CategoryList() {
     const dispatch = useDispatch();
-    const { categories = [] } = useSelector(state => state.category)
+    const { categories = [], isLoading, hasError=true } = useSelector(state => state.category)
 
     useEffect(() => {
         getAllCategories(dispatch)();
-    }, [])
+    }, [dispatch])
 
 
     return <div>
-        List Of Categories
+        {isLoading && <p className='flex text-xl mt-12 items-center justify-center'>Loading....</p>}
+        {hasError && <p className='flex text-xl mt-12 items-center text-red-500 justify-center'>{hasError}</p>}
         <ul>
-            {categories.map(({ id, name }) => <li key={id}>{name}</li>)}
+            {categories.map(({ id, name }) => <li key={id} className='border p-4 mb-2 m-2 hover:bg-slate-200 cursor-pointer transition'>{name}</li>)}
         </ul>
     </div>
 } 
