@@ -1,8 +1,8 @@
 import axios from "axios";
 import { getAuthDetails } from "./utils/auth";
 
-// const BASE_API_URL = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev`;
-const BASE_API_URL = 'https://138.68.84.154:5000';
+ const BASE_API_URL = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev`;
+//const BASE_API_URL = 'https://138.68.84.154:5000';
 
 const getAuthHeaders = () => {
     const userAuthDetails = getAuthDetails();
