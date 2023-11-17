@@ -16,10 +16,23 @@ export default function TaskList() {
 		handleDeleteTask(dispatch)(id)
 	}
 
-    
+    /*
+className="max-h-[500px] overflow-y-auto
+    [&::-webkit-scrollbar]:w-2
+    [&::-webkit-scrollbar-track]:bg-white
+    [&::-webkit-scrollbar-thumb]:bg-gray-100
+    dark:[&::-webkit-scrollbar-track]:bg-slate-100
+    dark:[&::-webkit-scrollbar-thumb]:bg-slate-300"
+
+	*/
 
 	return <div>
-		<div className="container mx-auto p-4 mt-2 ">
+		<div className="container mx-auto p-4 mt-2 max-h-[500px] overflow-y-auto
+    [&::-webkit-scrollbar]:w-2
+    [&::-webkit-scrollbar-track]:bg-white
+    [&::-webkit-scrollbar-thumb]:bg-gray-100
+    dark:[&::-webkit-scrollbar-track]:bg-slate-100
+    dark:[&::-webkit-scrollbar-thumb]:bg-slate-300">
 			<secion className="flex justify-between items-center">
 			<h2 className="text-2xl font-bold mb-4">Tasks</h2>
 			<Link

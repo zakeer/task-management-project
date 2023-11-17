@@ -51,7 +51,7 @@ const AddTask = ({ edit }) => {
 
 
     return (
-        <div className="max-w-lg mx-auto my-10 bg-blue-300 p-8 rounded-lg sm:shadow sm:border">
+        <div className="max-w-lg mx-auto my-10 bg-slate-200 p-8 rounded-lg sm:shadow sm:border">
 
         
             <label htmlFor="category" className="block mb-2 text-lg font-medium text-gray-900 dark:text-slate-900">
@@ -68,7 +68,7 @@ const AddTask = ({ edit }) => {
                     <input
                         type="text"
                         id="title"
-                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-blue-500 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-white border border-slate-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-slate-900 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Title"
                         defaultValue={defaultValue?.title}
                         required
@@ -81,7 +81,7 @@ const AddTask = ({ edit }) => {
                     <input
                         type="text"
                         id="description"
-                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-blue-500 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-slate-900 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Description"
                         defaultValue={defaultValue?.description}
                         required
@@ -94,7 +94,7 @@ const AddTask = ({ edit }) => {
                     <input
                         type="date"
                         id="dueDate"
-                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-blue-500 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-slate-900 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Due Date"
                         required
                     />
@@ -105,7 +105,7 @@ const AddTask = ({ edit }) => {
                     </label>
                     <select
                         id="priority"
-                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-blue-500 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-slate-900 dark:placeholder-slate-900 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Due Date"
                         defaultValue="low"
                     >
@@ -121,7 +121,7 @@ const AddTask = ({ edit }) => {
                     <select
                         defaultValue={defaultValue?.categoryId}
                         id="categoryId"
-                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-blue-500 dark:placeholder-gray-400 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        className="bg-white border border-blue-500 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-slate-900 dark:placeholder-gray-400 dark:text-slate-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Category"
                     >
                         <option value>Select</option>

@@ -11,7 +11,12 @@ export default function CategoryList() {
     }, [dispatch])
 
 
-    return <div>
+    return <div className="max-h-[500px] overflow-y-auto
+    [&::-webkit-scrollbar]:w-2
+    [&::-webkit-scrollbar-track]:bg-white
+    [&::-webkit-scrollbar-thumb]:bg-gray-100
+    dark:[&::-webkit-scrollbar-track]:bg-slate-100
+    dark:[&::-webkit-scrollbar-thumb]:bg-slate-300">
         {isLoading && <p className='flex text-xl mt-12 items-center justify-center'>Loading....</p>}
         {hasError && <p className='flex text-xl mt-12 items-center text-red-500 justify-center'>{hasError}</p>}
         <ul>
