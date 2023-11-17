@@ -1,7 +1,9 @@
 import axios from "axios";
 import { getAuthDetails } from "./utils/auth";
 
-const BASE_API_URL = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev`;
+
+const BASE_API_URL = `https://potential-parakeet-w6qv65pg54r35477-5000.app.github.dev`;
+
 
 const getAuthHeaders = () => {
     const userAuthDetails = getAuthDetails();
@@ -69,7 +71,8 @@ payload = {
 */
 
 export const updateTask = ({ id, userId, ...rest }) => {
-    return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${payload.id}`, rest, {
+    console.log(id, rest, "FROM UPDATE TASK -> SERVICES.js")
+    return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${id}`, rest, {
         headers: {
             ...getAuthHeaders()
         }
@@ -77,6 +80,7 @@ export const updateTask = ({ id, userId, ...rest }) => {
 }
 
 export const deleteTask = (id) => {
+    console.log(id, "FROM delete task")
     return axios.delete(`${API_ENDPOINTS.CREATE_TASK}/${id}`, {
         headers: {
             ...getAuthHeaders()

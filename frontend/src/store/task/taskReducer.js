@@ -5,6 +5,8 @@ const initialState = {
     isLoading: false,
     hasError: null,
     isNewTaskAdded: false,
+    isTaskUpdated : false,
+    isTaskDeleted : false
 }
 
 export default function taskReducer(state = initialState, action) {
@@ -15,13 +17,14 @@ export default function taskReducer(state = initialState, action) {
             return {
                 taskItems: [],
                 isLoading: true,
-                hasError: null
+                hasError: null,
+                
             }
         case ACTIONS.FETCH_TASK_LIST_SUCCESS:
             return {
                 taskItems: payload,
                 isLoading: false,
-                hasError: null
+                hasError: null,
             }
         case ACTIONS.FETCH_TASK_LIST_FAILURE:
             return {
@@ -64,8 +67,41 @@ export default function taskReducer(state = initialState, action) {
             }
         }
 
+        case ACTIONS.UPDATE_TASK_SUCCESS : {
+            return {
+                ...state,
+                isTaskUpdated : true,
+                hasError : null,
+            }
+        }
+
+        case ACTIONS.UPDATE_TASK_FAILURE : {
+            return {
+                ...state,
+                isTaskUpdated : false,
+                hasError : payload
+            }
+        }
+
+        case ACTIONS.DELETE_TASK_SUCCESS : {
+             return {
+                ...state,
+                isTaskDeleted :true,
+                hasError : null
+             }
+
+        }
+
+        case ACTIONS.DELETE_TASK_FAILURE : {
+            return {
+                ...state,
+                isTaskDeleted : false,
+                hasError : payload,
+            }
+        }
+
         default:
-            return state
+            return state;
     }
 }
 
