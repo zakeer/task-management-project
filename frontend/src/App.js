@@ -1,16 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './components/users/Login'
 import Register from './components/users/Register'
-import Header from './components/common/Header';
+import Header from './components/common/Header'
 import Logout from './components/users/Logout'
-import { ProtectedRoute } from './components/common/ProtectedRoute';
-import AddCategory from './components/category/AddCategory';
-import CategoryList from './components/category/CategoryList';
-import TaskList from './components/tasks/TaskList';
-import AddTask from './components/tasks/AddTask';
-import('preline');
-
-
+import { ProtectedRoute } from './components/common/ProtectedRoute'
+import AddCategory from './components/category/AddCategory'
+import CategoryList from './components/category/CategoryList'
+import TaskList from './components/tasks/TaskList'
+import AddTask from './components/tasks/AddTask'
+import('preline')
 
 export default function App() {
     return (
@@ -18,7 +16,6 @@ export default function App() {
             <BrowserRouter>
                 <Header />
                 <Routes>
-
                     <Route path="/login" element={<Login />}></Route>
                     <Route path="/register" element={<Register />}></Route>
                     <Route path="/logout" element={<Logout />} />

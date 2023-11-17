@@ -1,17 +1,17 @@
-const STORAGE_KEY = "@USER@";
+const STORAGE_KEY = '@USER@'
 
-export const saveAuth = (payload) => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+export const saveAuth = payload => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(payload))
 }
 
 export const getAuthDetails = () => {
-    const authDetails = localStorage.getItem(STORAGE_KEY);
+    const authDetails = localStorage.getItem(STORAGE_KEY)
     if (authDetails) {
-        return JSON.parse(authDetails);
+        return JSON.parse(authDetails)
     }
-    return {};
+    return {}
 }
 
 export const clearAuthDetails = () => {
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_KEY)
 }

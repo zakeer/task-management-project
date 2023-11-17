@@ -7,9 +7,9 @@ const AddCategory = () => {
     const [name, setName] = useState('')
     const dispatch = useDispatch()
     const saveCategory = async e => {
-        e.preventDefault();
-        createCategory(dispatch)(name);
-        setName('');
+        e.preventDefault()
+        createCategory(dispatch)(name)
+        setName('')
     }
 
     return (

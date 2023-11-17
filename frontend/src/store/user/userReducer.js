@@ -1,7 +1,7 @@
-import { getAuthDetails } from "../../utils/auth";
-import { USER_ACTIONS } from "./actions";
+import { getAuthDetails } from '../../utils/auth'
+import { USER_ACTIONS } from './actions'
 
-const previousAuthState = getAuthDetails();
+const previousAuthState = getAuthDetails()
 
 const userInitialState = {
     token: null,
@@ -11,8 +11,8 @@ const userInitialState = {
 }
 
 export default function userReducer(state = userInitialState, action) {
-    const { type, payload } = action || {};
-    console.log(":: userReducer INVOKED ::", { state, action })
+    const { type, payload } = action || {}
+    console.log(':: userReducer INVOKED ::', { state, action })
 
     switch (type) {
         case USER_ACTIONS.LOGIN_SUCCESS:
@@ -26,15 +26,15 @@ export default function userReducer(state = userInitialState, action) {
             return {
                 ...state,
                 token: null,
-                error: payload
+                error: payload,
             }
         case USER_ACTIONS.LOGOUT:
             return {
                 ...state,
                 token: null,
-                error: null
+                error: null,
             }
         default:
-            return state;
+            return state
     }
 }
