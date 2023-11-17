@@ -3,82 +3,58 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCategory, getAllCategories } from '../../store/category/actions'
 import { addTask } from '../../store/task/actions'
-import { fetchAllTaskList, taskUpdation} from '../../store/task/actions';
-
+import { taskUpdation } from '../../store/task/actions'
 
 const AddTask = ({ edit }) => {
-    const dispatch = useDispatch();
-    const { categories = [] } = useSelector(state => state.category || {});
-    const { isLoading, isNewTaskAdded, hasError, taskItems = [] } = useSelector(state => state.tasks || {});
-    const navigate = useNavigate();
-    let { taskId } = useParams();
+    const dispatch = useDispatch()
+    const { categories = [] } = useSelector(state => state.category || {})
+    const { isLoading, isNewTaskAdded, hasError, taskItems = [], isTaskUpdated } = useSelector(state => state.tasks || {})
+    const navigate = useNavigate()
+    let { taskId } = useParams()
     useEffect(() => {
-        getAllCategories(dispatch)();
+        getAllCategories(dispatch)()
     }, [])
 
-    const onSubmit = (e) => {
-        e.preventDefault();
+    const onSubmit = e => {
+        e.preventDefault()
         if (isLoading) {
-            return false;
+            return false
         }
-        const { target } = e;
-        const newTaskPayload = [...target.querySelectorAll("input, select")].reduce((prev, curr) => {
+        const { target } = e
+        const newTaskPayload = [...target.querySelectorAll('input, select')].reduce((prev, curr) => {
             prev[curr.id] = curr.value
-            return prev;
-        }, {});
-        //addTask(dispatch)(newTaskPayload);
-
+            return prev
+        }, {})
         if (edit) {
-            // If in edit mode, call handleUpdateTask
-            taskUpdation({taskId,...newTaskPayload});
-          } else {
-            // If not in edit mode, call addTask
-            addTask(dispatch)(newTaskPayload);
-          }
+            taskUpdation(dispatch)({ id: taskId, ...newTaskPayload })
+        } else {
+            addTask(dispatch)(newTaskPayload)
+        }
     }
-
-    // const handleUpdateTask = async (taskId, updatedFields) => {
-    //     try {
-    //       await taskUpdation(dispatch)({ taskId, updatedFields });
-    //       // Optionally, you can dispatch a fetchAllTaskList action to refresh the task list
-    //       // after successful update.
-    //       fetchAllTaskList(dispatch)();
-    //     } catch (error) {
-    //       console.error('Error updating task:', error);
-    //     }
-    //   };
-
-
-    // const handleUpdateTask = async (taskId, newTaskPayload) => {
-    //     try {
-    //       console.log('Before updateTask API call');
-    //       await taskUpdation(dispatch)({id:taskId, ...newTaskPayload});
-    //       console.log('After updateTask API call');
-    //       fetchAllTaskList(dispatch)(); // Optionally, you can dispatch a fetchAllTaskList action to refresh the task list after successful update.
-    //     } catch (error) {
-    //       console.error('Error updating task:', error);
-    //     }
-    //   };
     useEffect(() => {
         if (isNewTaskAdded) {
             setTimeout(() => {
-                navigate('/tasks');
-            }, 3000);
+                navigate('/tasks')
+            }, 3000)
         }
-    }, [isNewTaskAdded, navigate]);
+    }, [isNewTaskAdded, navigate])
+
+    useEffect(() => {
+        if (isTaskUpdated) {
+            setTimeout(() => {
+                navigate('/tasks')
+            }, 2000)
+        }
+    }, [isTaskUpdated, navigate])
 
     const defaultValue = useMemo(() => {
-        if (!taskId) return {};
+        if (!taskId) return {}
         return taskItems.find(task => task.id == taskId) || {}
-    }, [taskItems, taskId]);
-
+    }, [taskItems, taskId])
 
     return (
         <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-lg sm:shadow sm:border">
-
-            {hasError && <h2 className="text-lg text-red-500 font-semibold text-gray-800 dark:text-white">
-                {hasError}
-            </h2>}
+            {hasError && <h2 className="text-lg text-red-500 font-semibold text-gray-800 dark:text-white">{hasError}</h2>}
             <label htmlFor="category" className="block mb-2 text-lg font-medium text-gray-900 dark:text-white">
                 {edit ? 'Edit' : 'Add'} Task
             </label>
@@ -129,8 +105,7 @@ const AddTask = ({ edit }) => {
                         id="priority"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Due Date"
-                        defaultValue="low"
-                    >
+                        defaultValue="low">
                         <option value="low">low</option>
                         <option value="medium">medium</option>
                         <option value="high">high</option>
@@ -144,13 +119,14 @@ const AddTask = ({ edit }) => {
                         defaultValue={defaultValue?.categoryId}
                         id="categoryId"
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Category"
-                    >
+                        placeholder="Category">
                         <option value>Select</option>
-                        {categories?.map(category => <option value={category.id}>{category.name}</option>)}
+                        {categories?.map(category => (
+                            <option value={category.id}>{category.name}</option>
+                        ))}
                     </select>
                 </div>
-                
+
                 <button
                     type="submit"
                     className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
@@ -165,21 +141,31 @@ const AddTask = ({ edit }) => {
                 </Link>
             </form>
 
-            {isNewTaskAdded && <div className="fixed bottom-0 end-0 z-[60] max-w-sm w-full mx-auto p-6">
-                <div className="p-4 bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700">
-                    <div className="flex gap-x-5">
-                        <div className="grow">
-                            <h2 className="text-lg text-green-500 font-semibold text-gray-800 dark:text-white">
-                                Success
-                            </h2>
-                            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                                New Task Added
-                            </p>
+            {isNewTaskAdded && (
+                <div className="fixed bottom-0 end-0 z-[60] max-w-sm w-full mx-auto p-6">
+                    <div className="p-4 bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700">
+                        <div className="flex gap-x-5">
+                            <div className="grow">
+                                <h2 className="text-lg text-green-500 font-semibold text-gray-800 dark:text-white">Success</h2>
+                                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">New Task Added</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>}
+            )}
 
+            {isTaskUpdated && (
+                <div className="fixed bottom-0 end-0 z-[60] max-w-sm w-full mx-auto p-6">
+                    <div className="p-4 bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700">
+                        <div className="flex gap-x-5">
+                            <div className="grow">
+                                <h2 className="text-lg text-green-500 font-semibold text-gray-800 dark:text-white">Success</h2>
+                                <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">Task Updated Successfully</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
