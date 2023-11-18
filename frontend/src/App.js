@@ -38,6 +38,7 @@ export default function App() {
                         <Route path="/tasks/edit/:taskId" element={<AddTask edit />}></Route>
                         <Route path="/add-task" element={<AddTask />}></Route>
                         <Route path="/categories" element={<CategoryList />}></Route>
+                        <Route path="/categories/edit/:id" element={<AddCategory edit />}></Route>
                         <Route path="/add-category" element={<AddCategory />}></Route>
                     </Route>
                 </Routes>

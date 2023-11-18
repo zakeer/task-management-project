@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { createCategory, getAllCategories } from '../../store/category/actions'
-import { addTask } from '../../store/task/actions'
+import { addTask, editTask } from '../../store/task/actions'
 
 const AddTask = ({ edit }) => {
     const dispatch = useDispatch();
@@ -10,6 +10,7 @@ const AddTask = ({ edit }) => {
     const { isLoading, isNewTaskAdded, hasError, taskItems = [] } = useSelector(state => state.tasks || {});
     const navigate = useNavigate();
     let { taskId } = useParams();
+
     useEffect(() => {
         getAllCategories(dispatch)();
     }, [])
@@ -19,12 +20,15 @@ const AddTask = ({ edit }) => {
         if (isLoading) {
             return false;
         }
+
         const { target } = e;
         const newTaskPayload = [...target.querySelectorAll("input, select")].reduce((prev, curr) => {
             prev[curr.id] = curr.value
             return prev;
         }, {})
-        addTask(dispatch)(newTaskPayload);
+
+        edit ? editTask(dispatch)(newTaskPayload) : addTask(dispatch)(newTaskPayload);
+ 
     }
 
     useEffect(() => {

@@ -21,6 +21,8 @@ const API_ENDPOINTS = {
 
     ADD_CATEGORY: `${BASE_API_URL}/addNewCategory`,
     GET_CATEGORIES: `${BASE_API_URL}/categories`,
+
+    DELETE_CATEGORYLIST: `${BASE_API_URL}/categories`
 }
 
 export const userLogin = (payload) => {
@@ -55,6 +57,16 @@ export const createNewTask = (payload) => {
         }
     })
 }
+
+
+
+export const deleteCategoryList = (payload) => {
+    return axios.delete(API_ENDPOINTS.DELETE_CATEGORYLIST, payload, {
+        headers: {
+            ...getAuthHeaders()
+        }
+    })
+} 
 
 /*
 payload = {
