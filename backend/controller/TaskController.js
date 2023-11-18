@@ -33,7 +33,7 @@ export const createTask = async (req, res) => {
     categoryId  Int
     userId      Int
     */
-    const { title, description, dueDate, priority = 'low', isComplete = false, categoryId } = req.body;
+    const { title, description, dueDate, priority = 'low', isComplete = false, categoryId } = req.body
 
     if (!title || !description || !dueDate || !categoryId) {
         return res.status(400).json({ error: `Title, Description, DueDate and CategoryID are required` })
@@ -47,7 +47,7 @@ export const createTask = async (req, res) => {
                 priority,
                 isComplete,
                 categoryId: +categoryId,
-                userId: req?.user?.id
+                userId: req?.user?.id,
             },
         })
         res.status(201).json(task)
@@ -57,15 +57,19 @@ export const createTask = async (req, res) => {
 }
 
 export const updateTask = async (req, res) => {
-    const { name, price } = req.body
+    const { title, description, dueDate, priority = 'low', isComplete = false, categoryId } = req.body
     try {
         const task = await prisma.task.update({
             where: {
                 id: Number(req.params.id),
             },
             data: {
-                name: name,
-                price: price,
+                title,
+                description,
+                dueDate: new Date(dueDate),
+                priority,
+                isComplete,
+                categoryId: +categoryId,
             },
         })
         res.status(200).json(task)
