@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getAuthDetails } from "./utils/auth";
 
-const BASE_API_URL = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev`;
+ const BASE_API_URL = `https://silver-telegram-4p4v4r9x75c99-5000.app.github.dev`;
+//const BASE_API_URL = 'https://138.68.84.154:5000';
 
 const getAuthHeaders = () => {
     const userAuthDetails = getAuthDetails();
@@ -20,6 +21,8 @@ const API_ENDPOINTS = {
 
     ADD_CATEGORY: `${BASE_API_URL}/addNewCategory`,
     GET_CATEGORIES: `${BASE_API_URL}/categories`,
+
+    DELETE_CATEGORYLIST: `${BASE_API_URL}/categories`
 }
 
 export const userLogin = (payload) => {
@@ -55,6 +58,16 @@ export const createNewTask = (payload) => {
     })
 }
 
+
+
+export const deleteCategoryList = (payload) => {
+    return axios.delete(API_ENDPOINTS.DELETE_CATEGORYLIST, payload, {
+        headers: {
+            ...getAuthHeaders()
+        }
+    })
+} 
+
 /*
 payload = {
     "id": 1,
@@ -68,18 +81,28 @@ payload = {
 }
 */
 
-export const updateTask = ({ id, userId, ...rest }) => {
-    return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${payload.id}`, rest, {
+export const updateTask = ({ id, userId, ...rest }, callback) => {
+    return axios.patch(`${API_ENDPOINTS.CREATE_TASK}/${id}`, rest, {
         headers: {
             ...getAuthHeaders()
         }
     })
+    .then((response) => {
+        if (callback && typeof callback === 'function') {
+            callback(response.data)
+        }
+    })
 }
 
-export const deleteTask = (id) => {
+export const deleteTask = (id, callback) => {
     return axios.delete(`${API_ENDPOINTS.CREATE_TASK}/${id}`, {
         headers: {
             ...getAuthHeaders()
+        }
+    })
+    .then((response) => {
+        if (callback && typeof callback === 'function') {
+            callback(response.data)
         }
     })
 }

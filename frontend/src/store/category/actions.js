@@ -1,8 +1,10 @@
-import { createNewCategory, fetchCategories } from "../../services";
+import { createNewCategory, fetchCategories, deleteCategoryList, updateCategoryList } from "../../services";
 
 export const ACTIONS = {
     FETCH_CATEGORIES: 'FETCH_CATEGORIES',
-    FETCH_CATEGORIES_SUCCESS: 'FETCH_CATEGORIES_SUCCESS'
+    FETCH_CATEGORIES_SUCCESS: 'FETCH_CATEGORIES_SUCCESS',
+
+    UPDATE_CATEGORY: 'UPDATE_CATEGORY',
 };
 
 
@@ -38,3 +40,16 @@ export const createCategory = (dispatch) => {
     }
 }
 
+export const deleteCategory = (dispatch) => {
+    return async (categoryId) => {
+        try {
+            await deleteCategoryList(categoryId);
+          dispatch ({
+            type: ACTIONS.DELETE_CATEGORY,
+            payload: categoryId,
+          })  
+        } catch (error) {
+            console.log('Error in deleting category', error)
+        }
+    }
+}

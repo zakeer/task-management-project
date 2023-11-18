@@ -1,4 +1,14 @@
+
+
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+
+//import { Provider } from 'react-redux'
+//import AddProduct from './components/AddProduct'
+//import EditProduct from './components/EditProduct'
+//import ProductList from './components/ProductList'
+//import appStore from './store/store'
+
 import Login from './components/users/Login'
 import Register from './components/users/Register'
 import Header from './components/common/Header';
@@ -28,6 +38,7 @@ export default function App() {
                         <Route path="/tasks/edit/:taskId" element={<AddTask edit />}></Route>
                         <Route path="/add-task" element={<AddTask />}></Route>
                         <Route path="/categories" element={<CategoryList />}></Route>
+                        <Route path="/categories/edit/:id" element={<AddCategory edit />}></Route>
                         <Route path="/add-category" element={<AddCategory />}></Route>
                     </Route>
                 </Routes>

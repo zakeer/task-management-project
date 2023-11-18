@@ -8,13 +8,22 @@ export const ACTIONS = {
     ADD_TASK: 'ADD_TASK',
     ADD_TASK_SUCCESS: 'ADD_TASK_SUCCESS',
     ADD_TASK_FAILURE: 'ADD_TASK_FAILURE',
-    CLEAR_ADD_TASK: 'CLEAR_ADD_TASK'
+    CLEAR_ADD_TASK: 'CLEAR_ADD_TASK',
+
+    EDIT_TASK: 'EDIT_TASK',
+    EDIT_TASK_SUCCESS: 'EDIT_TASK_SUCCESS',
+    EDIT_TASK_FAILURE: 'EDIT_TASK_FAILURE',
+
 }
 
 export const clearAddTask = () => ({ type: ACTIONS.CLEAR_ADD_TASK });
 export const addingTask = () => ({ type: ACTIONS.ADD_TASK });
 export const addingTaskSuccess = () => ({ type: ACTIONS.ADD_TASK_SUCCESS });
 export const addingTaskFailure = (error = "SOMETHING WENT WRONG") => ({ type: ACTIONS.ADD_TASK_FAILURE, payload: error });
+
+export const editingTask = () => ({ type: ACTIONS.EDIT_TASK });
+export const editingTaskSuccess = () => ({ type: ACTIONS.EDIT_TASK_SUCCESS });
+export const editingTaskFailure = (error = "SOMETHING WENT WRONG") => ({ type: ACTIONS.EDIT_TASK_FAILURE, payload: error });
 
 
 export const getAllTaskList = () => {
@@ -76,3 +85,18 @@ export const addTask = (dispatch) => {
     }
 }
 
+export const editTask = (dispatch) => {
+    return async (editedTaskPayload) => {
+      try {
+        dispatch(editingTask());
+        // API CALL
+        await updateTask(editedTaskPayload);
+        dispatch(editingTaskSuccess());
+      } catch (error) {
+        const errorMessage = error?.response?.data?.error;
+        console.log(":: editTask ERROR ::", { error, errorMessage });
+        dispatch(editingTaskFailure(errorMessage));
+      }
+    }
+  };
+  

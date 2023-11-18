@@ -3,14 +3,22 @@ import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { createCategory } from '../../store/category/actions'
 
-const AddCategory = () => {
+const AddCategory = ({edit}) => {
     const [name, setName] = useState('')
     const dispatch = useDispatch()
+    const { categoryId } = useParams()
     const saveCategory = async e => {
         e.preventDefault();
         createCategory(dispatch)(name);
         setName('');
     }
+
+    const { categories = []} = useSelector(state => state.category || {})
+
+    const categoryvalue = useMemo(() => {
+         if(!categoryId) return {}
+         return categories.find(category => category.id == categoryid) || {}
+    }, [ categories, categoryId])
 
     return (
         <div className="max-w-lg mx-auto my-10 bg-white p-8 rounded-lg sm:shadow sm:border">
@@ -26,13 +34,14 @@ const AddCategory = () => {
                         onChange={e => setName(e.target.value)}
                         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Category name"
+                        categoryvalue={categoryvalue?.name}
                         required
                     />
                 </div>
                 <button
                     type="submit"
                     className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700">
-                    Save
+                     {edit ? 'Edit' : 'save'}
                 </button>
                 <Link to="/">
                     <button
